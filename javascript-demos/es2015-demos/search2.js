@@ -50,7 +50,7 @@ function getDummyBookStore(){
 
 
 function printBooks(header,books){
-    console.log('header');
+    console.log(header);
     console.log('Price\tRating\tTitle\t\tAuthor')
     for(let book of books){
         console.log(`${book}`);
@@ -62,6 +62,48 @@ function printBooks(header,books){
 //---------- main program begins here
 
 let store=getDummyBookStore();
-
+let books=store.getAll();
 printBooks('All books', store.getAll());
 
+function search(fnSelector,...numbers){
+    if (numbers.length==1)
+        numbers=numbers[0];
+
+    let result=[];
+    for(let number of numbers)
+        if (fnSelector(number))
+            result.push(number);
+
+    return result;
+}
+
+//let isDinkarBooks=function(book){ return book.author==='Ramdhari Singh Dinkar'};
+
+//lambda functions
+//let isDinkarBooks=(book)=>{ return book.author==='Ramdhari Singh Dinkar'};
+
+//lambda expression
+let isDinkarBooks=  book =>  book.author==='Ramdhari Singh Dinkar';
+
+let dinkarBooks= search(isDinkarBooks, books);
+printBooks('Dinkar Books', dinkarBooks);
+
+
+//function style 
+function bookBetween100And200(book){
+    return book.price>=100 && book.price<200;
+}
+//anonymous style
+const priceRange100And200= function (book){
+    return book.price>=100 && book.price<200;
+}
+
+const range100And200= book => book.price>=100 && book.price<200;
+
+let result=search(range100And200, books);
+
+printBooks('priced 100-200',result);
+
+
+let highRated= search(b=> b.rating>4.5, books);
+printBooks('High Rated',highRated);

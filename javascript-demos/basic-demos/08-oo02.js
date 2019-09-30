@@ -22,7 +22,7 @@ showPerson(p2);
 //Java Script Object Notation (JSON)
 var p3={
     name:'Shivanshi',  //note use of colon
-    arg: 13
+    age: 13
 };
 showPerson(p3);
 

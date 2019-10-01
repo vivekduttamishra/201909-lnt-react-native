@@ -65,53 +65,15 @@ let store=getDummyBookStore();
 let books=store.getAll();
 printBooks('All books', store.getAll());
 
-function search(fnSelector,...numbers){
-    if (numbers.length==1)
-        numbers=numbers[0];
+//reduce function. reduces a list into a single value
+//example use case cost of all books
 
-    let result=[];
-    for(let number of numbers)
-        if (fnSelector(number))
-            result.push(number);
-
-    return result;
-}
-
-//let isDinkarBooks=function(book){ return book.author==='Ramdhari Singh Dinkar'};
-
-//lambda functions
-//let isDinkarBooks=(book)=>{ return book.author==='Ramdhari Singh Dinkar'};
-
-//lambda expression
-let isDinkarBooks=  book =>  book.author==='Ramdhari Singh Dinkar';
-
-let dinkarBooks= search(isDinkarBooks, books);
-printBooks('Dinkar Books', dinkarBooks);
+let total=books.reduce((sum,book)=> sum+book.price, 0);
+console.log('total',total);
 
 
-//function style 
-function bookBetween100And200(book){
-    return book.price>=100 && book.price<200;
-}
-//anonymous style
-const priceRange100And200= function (book){
-    return book.price>=100 && book.price<200;
-}
-
-//multi statement lambda with {} and explicit return 
-const greatBooks= book =>{   
-    return book.rating>4.5;
-};
-
-//single statement lambda without {} or implicit return
-const greatBooks2= book => book.rating>4.5; 
-
-const range100And200= book => book.price>=100 && book.price<200;
-
-let result=search(range100And200, books);
-
-printBooks('priced 100-200',result);
 
 
-let highRated= search(b=> b.rating>4.5, books);
-printBooks('High Rated',highRated);
+
+
+

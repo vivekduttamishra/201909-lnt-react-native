@@ -65,53 +65,21 @@ let store=getDummyBookStore();
 let books=store.getAll();
 printBooks('All books', store.getAll());
 
-function search(fnSelector,...numbers){
-    if (numbers.length==1)
-        numbers=numbers[0];
-
-    let result=[];
-    for(let number of numbers)
-        if (fnSelector(number))
-            result.push(number);
-
-    return result;
-}
-
-//let isDinkarBooks=function(book){ return book.author==='Ramdhari Singh Dinkar'};
-
-//lambda functions
-//let isDinkarBooks=(book)=>{ return book.author==='Ramdhari Singh Dinkar'};
-
-//lambda expression
-let isDinkarBooks=  book =>  book.author==='Ramdhari Singh Dinkar';
-
-let dinkarBooks= search(isDinkarBooks, books);
+//get a list of all matching objects
+let dinkarBooks= books.filter( b=> b.author.indexOf('Dinkar')>=0);
 printBooks('Dinkar Books', dinkarBooks);
 
+//get all non-existing items
+let vivekBooks= books.filter( b=> b.author.indexOf('Vivek')>=0);
+//printBooks('vivek books', vivekBooks);
+console.log('vivekBooks',vivekBooks);
 
-//function style 
-function bookBetween100And200(book){
-    return book.price>=100 && book.price<200;
-}
-//anonymous style
-const priceRange100And200= function (book){
-    return book.price>=100 && book.price<200;
-}
+//get a single item
+let dinkarBook= books.find( b=> b.author.indexOf('Dinkar')>=0);
+console.log('dinkarBook',dinkarBook);
 
-//multi statement lambda with {} and explicit return 
-const greatBooks= book =>{   
-    return book.rating>4.5;
-};
-
-//single statement lambda without {} or implicit return
-const greatBooks2= book => book.rating>4.5; 
-
-const range100And200= book => book.price>=100 && book.price<200;
-
-let result=search(range100And200, books);
-
-printBooks('priced 100-200',result);
+//get single non-existing item
+let vivekBook= books.find( b=> b.author.indexOf('Vivek')>=0);
+console.log('vivekBook',vivekBook);
 
 
-let highRated= search(b=> b.rating>4.5, books);
-printBooks('High Rated',highRated);

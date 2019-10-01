@@ -65,53 +65,23 @@ let store=getDummyBookStore();
 let books=store.getAll();
 printBooks('All books', store.getAll());
 
-function search(fnSelector,...numbers){
-    if (numbers.length==1)
-        numbers=numbers[0];
+//get a list of all matching objects
+books.forEach(b=>console.log(`${b.title} by ${b.author}`));
 
-    let result=[];
-    for(let number of numbers)
-        if (fnSelector(number))
-            result.push(number);
+//convert object from one type to another
 
-    return result;
-}
+// b=> {} <---- means a multiline lambda function
+//let quickInfo= books.map(b=> { name: b.title, writtenBy: b.author});
 
-//let isDinkarBooks=function(book){ return book.author==='Ramdhari Singh Dinkar'};
+//solution: use explicit return statement to return json
+//let quickInfo= books.map(b=>{ return { name: b.title, writtenBy: b.author}})
 
-//lambda functions
-//let isDinkarBooks=(book)=>{ return book.author==='Ramdhari Singh Dinkar'};
-
-//lambda expression
-let isDinkarBooks=  book =>  book.author==='Ramdhari Singh Dinkar';
-
-let dinkarBooks= search(isDinkarBooks, books);
-printBooks('Dinkar Books', dinkarBooks);
+//solution2: put a () around json. now js knows we are returning ()
+let quickInfo= books.map((b,i)=> ({id:i, name: b.title, writtenBy: b.author})  );
+quickInfo.forEach( (info,index)=> console.log(index,info));
 
 
-//function style 
-function bookBetween100And200(book){
-    return book.price>=100 && book.price<200;
-}
-//anonymous style
-const priceRange100And200= function (book){
-    return book.price>=100 && book.price<200;
-}
-
-//multi statement lambda with {} and explicit return 
-const greatBooks= book =>{   
-    return book.rating>4.5;
-};
-
-//single statement lambda without {} or implicit return
-const greatBooks2= book => book.rating>4.5; 
-
-const range100And200= book => book.price>=100 && book.price<200;
-
-let result=search(range100And200, books);
-
-printBooks('priced 100-200',result);
 
 
-let highRated= search(b=> b.rating>4.5, books);
-printBooks('High Rated',highRated);
+
+

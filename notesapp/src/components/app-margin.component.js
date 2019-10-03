@@ -3,8 +3,8 @@ import NoteList from './note-list.component';
 
 const _component=(props)=>{
     return (
-        <div>
-            <h1>Toolbar</h1>
+        <div class='app-margin'>
+            
             <NoteList/>
         </div>
     );

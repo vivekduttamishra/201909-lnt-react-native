@@ -1,5 +1,7 @@
 import React from 'react';
 import {MODE_VIEW} from '../consts';
+import {connect} from 'react-redux';
+import {noteEdit,noteDelete} from '../store/actions/action-creators';
 
 //const _component=(props)=>{
     //const selectedNote=props.selectedNote;
@@ -8,7 +10,7 @@ import {MODE_VIEW} from '../consts';
 
 
 //take selectedNote from props
-const _component=({selectedNote,onDeleteNote,onEditNote,mode})=>{
+const _component=({selectedNote,noteDelete,noteEdit,mode})=>{
     if(!selectedNote || mode!==MODE_VIEW)
         return(<div/>);
 
@@ -16,11 +18,11 @@ const _component=({selectedNote,onDeleteNote,onEditNote,mode})=>{
     return (
         <div className='container note-view'>
             <h1>{selectedNote.title}</h1>            
-            <button className='btn btn-sm btn-primary' onClick={onEditNote}>
+            <button className='btn btn-sm btn-primary' onClick={noteEdit}>
                 <i className="fa fa-edit"></i>
                 Edit Note
             </button>
-            <button className='btn btn-sm btn-danger' onClick={onDeleteNote}>
+            <button className='btn btn-sm btn-danger' onClick={()=>noteDelete(selectedNote.id)}>
                 <i className="fa fa-trash"></i>
                 Delete Note
             </button>
@@ -34,6 +36,13 @@ const _component=({selectedNote,onDeleteNote,onEditNote,mode})=>{
     );
 };
 
-export default _component;
+const mapStateToProps=state=>{
+    return {
+        selectedNote:state.selectedNote,
+        mode:state.mode
+    }
+}
+
+export default connect(mapStateToProps,{noteEdit,noteDelete})( _component);
 
 

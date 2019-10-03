@@ -80,8 +80,18 @@ class App extends React.Component {
       
 
     }else if(this.state.mode==MODE_EDIT){
-      //DO NOTHING YET. NOT YET IMPLEMENTED!
-      
+      //DO NOTHING YET. NOT YET IMPLEMENTED!      
+      notes=[...this.state.notes];
+      for(let i=0;i<notes.length;i++){
+        if (notes[i].id===selectedNote.id){
+          notes[i].title=editedNote.id;
+          notes[i].body=editedNote.body;
+          notes[i].tags=editedNote.tags;
+          selectedNote=notes[i]
+          break;
+        }
+          
+      }
     }
 
     this.setState({notes,selectedNote,mode});

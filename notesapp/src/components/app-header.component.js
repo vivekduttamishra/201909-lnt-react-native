@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {noteAdd} from '../store/actions/action-creators';
 
 const _component = (props) => {
     return (
@@ -12,7 +14,7 @@ const _component = (props) => {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                     <li className="nav-item active">
-                        <a className="nav-link" href="#" onClick={props.onNew}>
+                        <a className="nav-link" href="#" onClick={props.noteAdd}>
                             <i className="fa fa-plus"></i>  Note 
                            
                         </a>
@@ -44,6 +46,7 @@ const _component = (props) => {
     );
 };
 
-export default _component;
+
+export default connect(null, {noteAdd})(_component);
 
 

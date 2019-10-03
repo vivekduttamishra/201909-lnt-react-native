@@ -5,7 +5,7 @@ const _component=(props)=>{
     return (
         <div className='app-margin'>
             
-            <NoteList notes={props.notes} onNoteSelect={props.onNoteSelect} />
+            <NoteList  />
         </div>
     );
 };

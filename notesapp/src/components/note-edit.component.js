@@ -21,6 +21,13 @@ class _Component extends React.Component {
         this.setState({title:e.target.value});
     };
 
+    componentWillReceiveProps(props){
+        console.log('got property',props);
+        
+        this.setState({...props.selectedNote});
+        console.log('after property, state',this.state);
+    }
+
     render() {
 
         if (this.props.mode == MODE_VIEW || this.props.selectedNote === null)

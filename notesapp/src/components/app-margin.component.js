@@ -3,9 +3,9 @@ import NoteList from './note-list.component';
 
 const _component=(props)=>{
     return (
-        <div class='app-margin'>
+        <div className='app-margin'>
             
-            <NoteList/>
+            <NoteList notes={props.notes} onNoteSelect={props.onNoteSelect} />
         </div>
     );
 };

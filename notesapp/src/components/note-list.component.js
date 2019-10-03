@@ -1,14 +1,17 @@
 import React from 'react';
 
 const _component=(props)=>{
+
+    let list= props.notes.map(note=>(
+        <li key={note.id}
+        className='list-group-item list-group-item-action'
+        onClick={()=>props.onNoteSelect(note)} >{note.title}</li>
+    ));
+
     return (
-        <div>
-            <ul>
-                <li>Note 1</li>
-                <li>Note 2</li>
-                <li>Note 3</li>
-                <li>Note 4</li>
-                <li>Note 5</li>
+        <div className='note-list'>
+            <ul className='list-group'>
+                {list}                
             </ul>
         </div>
     );

@@ -47,6 +47,8 @@
   font-size: 3em;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   text-transform: capitalize;
+  padding-bottom: 70px;
+  
 }
 
 .note-body{
@@ -73,10 +75,24 @@
   text-align: left;
   margin:10px;
   padding:10px;
+  
 }
 
 .note-editor textarea{
   
   width:80%;
   min-height: 200px;
+}
+
+.note-list{
+  padding-top:20px;
+  margin-right:5px;
+}
+.note-list li{
+  margin-bottom:2px;
+  cursor:pointer;
+}
+
+.btn{
+  margin:5px;
 }

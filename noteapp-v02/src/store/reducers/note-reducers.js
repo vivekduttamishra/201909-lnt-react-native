@@ -1,4 +1,4 @@
-import {NOTE_ADD,NOTE_EDIT,NOTE_DELETE,NOTE_SAVE,NOTE_SELECT,NOTE_FETCHED} from '../actions/action-types';
+import {NOTE_ADD,NOTE_EDIT,NOTE_DELETE,NOTE_SAVE,NOTE_SELECT} from '../actions/action-types';
 import {MODE_EDIT,MODE_NEW,MODE_VIEW} from '../../consts';
 import Note from '../../model/note';
 
@@ -6,8 +6,6 @@ import Note from '../../model/note';
 export const allNotesReducer=(allNotes=[], action)=>{
     switch(action.type){       
             
-        case NOTE_FETCHED:
-            return action.notes;
         case NOTE_DELETE:
             return allNotes.filter(n=>n.id!==action.id);
         case NOTE_SAVE:
@@ -29,13 +27,6 @@ export const allNotesReducer=(allNotes=[], action)=>{
 
 export const selectedNoteReducer=(selectedNote=null,action)=>{
     switch(action.type){
-        case NOTE_FETCHED:
-            let notes=action.notes;
-            if (notes && notes.length>0)
-                return notes[0];
-            else
-                return selectedNote;
-
         case NOTE_ADD:
             return {title:'',body:'',tags:''};
         case NOTE_SELECT:                
@@ -47,13 +38,6 @@ export const selectedNoteReducer=(selectedNote=null,action)=>{
 
 export const modeReducer=(currentMode=MODE_VIEW, action)=>{
     switch(action.type){
-        case NOTE_FETCHED:
-            let notes=action.notes;
-            if(notes && notes.length>0)
-                return MODE_VIEW;
-            else
-                return MODE_NEW;
-                
         case NOTE_SELECT:
             return MODE_VIEW;
         case NOTE_EDIT:

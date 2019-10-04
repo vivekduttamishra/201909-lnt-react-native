@@ -1,5 +1,6 @@
-import {combineReducers,createStore} from 'redux';
+import {combineReducers,createStore, applyMiddleware} from 'redux';
 import {allNotesReducer,selectedNoteReducer,modeReducer} from './note-reducers';
+import promiseMiddleware from 'redux-promise';
 
 const reducer= combineReducers({    ////this can be treated as state of my compoent
     notes:allNotesReducer,              //notes
@@ -8,6 +9,6 @@ const reducer= combineReducers({    ////this can be treated as state of my compo
 });
 
 export default ()=>{
-    return createStore(reducer);
-}
+    return createStore(reducer, applyMiddleware(promiseMiddleware));
+};
 

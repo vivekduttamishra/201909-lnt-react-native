@@ -7,7 +7,8 @@ export const allNotesReducer=(allNotes=[], action)=>{
     switch(action.type){       
             
         case NOTE_FETCHED:
-            return action.notes;
+            console.log('NOTE_FETCHED reducer got ',action);
+            return action.payload;
         case NOTE_DELETE:
             return allNotes.filter(n=>n.id!==action.id);
         case NOTE_SAVE:
@@ -48,6 +49,7 @@ export const selectedNoteReducer=(selectedNote=null,action)=>{
 export const modeReducer=(currentMode=MODE_VIEW, action)=>{
     switch(action.type){
         case NOTE_FETCHED:
+            
             let notes=action.notes;
             if(notes && notes.length>0)
                 return MODE_VIEW;

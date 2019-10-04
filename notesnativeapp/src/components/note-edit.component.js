@@ -4,10 +4,13 @@ import {
     Text,
     TextInput,
     Button,
+    Modal,
     StyleSheet
 } from 'react-native';
 import {connect} from 'react-redux';
 import {noteSave} from '../store/actions/action-creators';
+
+import {MODE_EDIT,MODE_NEW,MODE_VIEW, MODE_LIST} from '../consts';
 
 const styles = StyleSheet.create({
     container: {
@@ -62,11 +65,18 @@ class _component extends React.Component {
         this.setState({tags});
     }
 
-
+    componentWillReceiveProps(props){
+        this.setState({...props});
+    }
 
     render = () => {
+        let mode=this.props.mode;
+        console.log('mode in note edit',mode);
+        if (mode!==MODE_EDIT && mode!==MODE_NEW)
+              return <View/>
+
         return (
-            <View style={styles.container}>
+            <Modal style={styles.container} visible={mode===MODE_EDIT || mode===MODE_NEW}>
                 <Text style={styles.heading}>New Note</Text>
 
                 <TextInput
@@ -96,13 +106,20 @@ class _component extends React.Component {
                     color='green'
                     onPress={()=>this.props.noteSave(null,this.state)}
                 />
-            </View>
+            </Modal>
         );
     };
+}
+
+const mapStateToProps=state=>{
+    return  {
+        mode:state.mode,
+        selectedNote:state.selectedNote
+    }
 }
 
 const actions={
     noteSave
 }
 
-export default connect(null,actions)( _component);
+export default connect(mapStateToProps,actions)( _component);

@@ -7,7 +7,10 @@ import {
 
 import NoteEdit from './components/note-edit.component';
 import NoteList from './components/note-list.component';
-import {getAllNotes} from './store/actions/action-creators';
+import NoteView from './components/note-view.component';
+import AppHeader from './components/header.component';
+
+import { getAllNotes } from './store/actions/action-creators';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
@@ -17,14 +20,7 @@ const styles = StyleSheet.create({
     //padding:10
     flex: 1
   },
-  heading: {
-    fontSize: 50,
-    textAlign: 'center',
-    backgroundColor: 'lightblue',
-    marginBottom: 20,
-    //borderColor:'yellow',
-    //borderWidth:3
-  },
+
   body: {
     //borderColor:'red',
     //borderWidth:3,
@@ -41,26 +37,28 @@ const styles = StyleSheet.create({
 
 class _component extends React.Component {
 
-  componentDidMount=()=>{
+  componentDidMount = () => {
     this.props.getAllNotes();
   }
 
   render = () => {
     return (
       <View style={styles.container} >
-        <Text style={styles.heading}>Notes</Text>
+        <AppHeader />
         <View style={styles.body}>
-          <NoteEdit />
+          <NoteEdit/>
+          <NoteView/>
           <NoteList />
         </View>
       </View>
+
     );
   };
 }
 
-const mapActions={
+const mapActions = {
   getAllNotes
 }
 
-export default connect(null,mapActions)( _component);
+export default connect(null, mapActions)(_component);
 

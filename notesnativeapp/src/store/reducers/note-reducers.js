@@ -1,5 +1,5 @@
-import {NOTE_ADD,NOTE_EDIT,NOTE_DELETE,NOTE_SAVE,NOTE_SELECT,NOTE_FETCHED} from '../actions/action-types';
-import {MODE_EDIT,MODE_NEW,MODE_VIEW} from '../../consts';
+import {NOTE_ADD,NOTE_EDIT,NOTE_DELETE,NOTE_SAVE,NOTE_SELECT,NOTE_FETCHED, NOTE_LIST_MODE} from '../actions/action-types';
+import {MODE_EDIT,MODE_NEW,MODE_VIEW,MODE_LIST} from '../../consts';
 import Note from '../../model/note';
 
 
@@ -31,7 +31,7 @@ export const allNotesReducer=(allNotes=[], action)=>{
 export const selectedNoteReducer=(selectedNote={title:'',body:'',tags:''},action)=>{
     switch(action.type){
         case NOTE_FETCHED:
-            let notes=action.notes;
+            let notes=action.payload;
             if (notes && notes.length>0)
                 return notes[0];
             else
@@ -46,18 +46,20 @@ export const selectedNoteReducer=(selectedNote={title:'',body:'',tags:''},action
     }
 }
 
-export const modeReducer=(currentMode=MODE_VIEW, action)=>{
+export const modeReducer=(currentMode=MODE_LIST, action)=>{
     switch(action.type){
-        case NOTE_FETCHED:
-            
-            let notes=action.notes;
+        case NOTE_FETCHED:            
+            let notes=action.payload;
             if(notes && notes.length>0)
-                return MODE_VIEW;
+                return MODE_LIST;
             else
                 return MODE_NEW;
                 
         case NOTE_SELECT:
             return MODE_VIEW;
+
+        case NOTE_LIST_MODE:
+            return MODE_LIST;
         case NOTE_EDIT:
             return MODE_EDIT;
         case NOTE_ADD:

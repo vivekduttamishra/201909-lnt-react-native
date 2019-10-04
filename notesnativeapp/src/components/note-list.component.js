@@ -7,6 +7,7 @@ import {
     StyleSheet,
     ScrollView,
     FlatList,
+    TouchableOpacity,
     Image
 } from 'react-native';
 
@@ -45,10 +46,16 @@ const _component = (props) => {
     let renderItem = (e) => {
         let note=e.item;        
         return (
-            <View style={styles.listItem} key={note.id} >
+            <TouchableOpacity 
+            style={styles.listItem} 
+            key={`${note.id}`}
+            
+            onPress={()=>props.noteSelect(note)}
+            
+            >
                 <Image source={noteIcon} style={styles.image} />
                 <Text style={styles.listText}>{note.title}</Text>
-            </View>
+            </TouchableOpacity>
         )
     };
 

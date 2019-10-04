@@ -1,4 +1,4 @@
-import { NOTE_ADD, NOTE_EDIT, NOTE_DELETE, NOTE_SAVE, NOTE_SELECT, NOTE_FETCHED } from './action-types';
+import { NOTE_ADD, NOTE_EDIT, NOTE_DELETE, NOTE_SAVE, NOTE_SELECT, NOTE_FETCHED,NOTE_LIST_MODE } from './action-types';
 import Note from '../../model/note';
 import noteApi from '../../model/note-api';
 
@@ -21,6 +21,12 @@ export const noteSelect = (note) => ({
     type: NOTE_SELECT,
     note: note
 });
+
+export const listMode=()=>{
+    return {
+        type:NOTE_LIST_MODE
+    }
+}
 
 export const noteEdit = () => ({
     type: NOTE_EDIT,
